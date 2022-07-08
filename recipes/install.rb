@@ -108,6 +108,13 @@ when "rhel", "amazon"
       else
         "http://packages.treasuredata.com/#{major}/redhat/$releasever/$basearch"
       end
+    when '4'
+      if platform == "amazon"
+      amazon_version = node['kernel']['release'].match(/\.amzn([[:digit:]]+)\./)[1]
+       "http://packages.treasuredata.com/#{major}/amazon/#{amazon_version}/$basearch"
+      else
+       "http://packages.treasuredata.com/#{major}/redhat/$releasever/$basearch"
+      end
     end
   yum_repository "treasure-data" do
     description "TreasureData"
